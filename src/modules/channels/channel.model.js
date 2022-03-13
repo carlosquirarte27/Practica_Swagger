@@ -6,4 +6,5 @@ class Channel extends Model {
     }
 }
 
+
 module.exports = Channel;
