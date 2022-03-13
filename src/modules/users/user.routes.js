@@ -72,6 +72,10 @@ router.get('/:id', controller.getOne);
   *           name: password
   *           required: true
   *           description: The id from the current user to get the invite id
+  *         - in: header
+  *           name: birthdate
+  *           required: false
+  *           description: The user birthdate
   *       responses:
   *         200:
   *           description: An object with a single message's data
