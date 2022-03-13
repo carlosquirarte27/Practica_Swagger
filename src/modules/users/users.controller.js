@@ -5,7 +5,15 @@ const UsersController = {
     getAll: (req, res) => {
         const user = new User();
         user.getAll().then(results => {
-            res.send(results);
+            if(req.headers.user_name && req.headers.password){
+                ra = results.filter(function (currentElement) {
+                    return currentElement.user_name === req.headers.user_name && currentElement.password === req.headers.password ;
+                  });
+                if(ra) res.send(ra);
+                else res.send("Usuario no encontrado")
+            }
+            else
+                res.send(results);
         });
     },
     getOne: (req, res) => {

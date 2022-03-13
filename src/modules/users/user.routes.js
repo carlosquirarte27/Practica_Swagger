@@ -32,48 +32,54 @@ router.get('/', controller.getAll);
  */
 router.get('/:id', controller.getOne);
 
-/**
- * @swagger
- *   /api/users/:
- *     get:
- *       tags:
- *       - Users
- *       description: Get one user by email and password
- *       parameters:
- *         - in: path
- *           username: user
- *           required: true
- *           description: The user's unique username 
- *         - in: path
- *           password: password
- *           required: true
- *           description: The user's unique password
- *       
- *       responses:
- *         200:
- *           description: An object with a single user's data
- */
- router.get('/', controller.log_in);
+  /**
+  * @swagger
+  *   /api/users/:
+  *     get:
+  *       tags:
+  *       - Users
+  *       description: Get one user by email and password
+  *       parameters:
+  *         - in: header
+  *           name: user_name
+  *           required: true
+  *           description: The message's unique ID
+  *         - in: header
+  *           name: password
+  *           required: false
+  *           description: The id from the current user to get the invite id
+  *       responses:
+  *         200:
+  *           description: An object with a single message's data
+  */
+ router.get('/', controller.getAll);
 
 
- /**
- * @swagger
- *   /api/users/:
- *     post:
- *       tags:
- *       - Users
- *       description: Get one user by email and password
- *       parameters:
- *         - in: body
- *           username: username
- *           required: true
- *           description: The user's unique username  
- *       responses:
- *         200:
- *           description: An object with a single user's data
- */
 
-
+  /**
+  * @swagger
+  *   /api/users/:
+  *     post:
+  *       tags:
+  *       - Users
+  *       description: create new user
+  *       parameters:
+  *         - in: body
+  *           name: user_name
+  *           required: true
+  *           description: The message's unique ID
+  *         - in: body
+  *           name: password
+  *           required: true
+  *           description: The id from the current user to get the invite id
+  *         - in: body
+  *           name: birthday
+  *           required: false
+  *           description: The user birthday
+  *       responses:
+  *         200:
+  *           description: An object with a single message's data
+  */
  
  router.post('/', controller.create);
 module.exports = router;
