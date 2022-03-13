@@ -11,7 +11,7 @@ const UsersController = {
                 ra = results.filter(function (currentElement) {
                     return currentElement.user_name === req.headers.user_name && currentElement.password === req.headers.password ;
                   });
-                if(ra.lenght > 0) res.send(ra);
+                if(ra.length > 0) res.send(ra);
                 else res.send("Usuario no encontrado")
             }
             else
