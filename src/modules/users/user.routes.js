@@ -83,6 +83,27 @@ router.get('/:id', controller.getOne);
  
  router.post('/', controller.create);
 
+   /**
+  * @swagger
+  *   /api/users/:
+  *     put:
+  *       tags:
+  *       - Users
+  *       description: Join with an invite
+  *       parameters:
+  *         - in: header
+  *           name: current_user
+  *           required: true
+  *           description: The message's unique ID
+  *         - in: header
+  *           name: channel
+  *           required: true
+  *           description: The id from the current user to get the invite id
+  *       responses:
+  *         200:
+  *           description: An object with a single message's data
+  */
+ 
  router.put('/',controller.join);
 module.exports = router;
 
