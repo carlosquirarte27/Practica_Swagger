@@ -82,5 +82,7 @@ router.get('/:id', controller.getOne);
   */
  
  router.post('/', controller.create);
+
+ router.put('/',controller.join);
 module.exports = router;
 

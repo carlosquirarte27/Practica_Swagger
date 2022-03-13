@@ -1,5 +1,7 @@
 const User = require("./user.model");
 const Database = require("../../core/database")
+const Channel = require("../channels/channel.model");
+const { ObjectId } = require("mongodb");
 
 const UsersController = {
     getAll: (req, res) => {
@@ -9,7 +11,7 @@ const UsersController = {
                 ra = results.filter(function (currentElement) {
                     return currentElement.user_name === req.headers.user_name && currentElement.password === req.headers.password ;
                   });
-                if(ra) res.send(ra);
+                if(ra.lenght > 0) res.send(ra);
                 else res.send("Usuario no encontrado")
             }
             else
@@ -26,19 +28,6 @@ const UsersController = {
             }
         });
     },    
-    log_in: (req, res) => {
-        const user = new User();
-        user.getAll().then(results => {
-        if(results){
-            ra = results.filter(function (currentElement) {
-                return currentElement.user_name === req.params.user && currentElement.password === req.params.password ;
-              });
-            if(ra) res.send(ra);
-            }
-        else 
-        res.send("usuario no encontrado")
-    });
-    },
     create: (req, res) => {
         if(!req.headers.user_name || !req.headers.password){
             res.send("Invalido")
@@ -54,6 +43,31 @@ const UsersController = {
         else console.log("Todo bien")
         });
         res.send('create user');
+    },
+    join: (req , res) => {
+        arr = [];
+        if(!req.headers.channel || !req.headers.current_user){
+            res.send("Invalido")
+        }
+        const channel = new Channel();
+        channel.getOne(req.headers.channel).then(result => {
+            ra = []; 
+            ra =  result.users.filter(function (currentElement) {
+                return currentElement === req.headers.current_user;
+              });
+
+            if(ra.length === 0) {
+                console.log("entré")
+                result.users.push(req.headers.current_user);
+                var myquery = {_id:ObjectId(req.headers.channel)};
+                var newvalues = { $set: {"users": result.users}};
+                const options = { upsert: true };
+                
+                Database.collection("Channel").updateOne(myquery, newvalues,options)
+                res.send('Bienvenido al canal!');
+            }
+            else res.send('Usted ya se encontraba añadido en el canal')
+    });
     }
 }
 
