@@ -33,10 +33,10 @@ const controller = require('./messages.controller');
  router.get('/:id', controller.getOne);
 /**
   * @swagger
-  *   /api/users/:
+  *   /api/messages/:
   *     post:
   *       tags:
-  *       - Message
+  *       - Messages
   *       description: Send new message
   *       parameters:
   *         - in: header
