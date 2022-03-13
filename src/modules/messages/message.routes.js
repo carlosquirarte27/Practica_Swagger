@@ -31,5 +31,35 @@ const controller = require('./messages.controller');
   *           description: An object with a single message's data
   */
  router.get('/:id', controller.getOne);
+/**
+  * @swagger
+  *   /api/users/:
+  *     post:
+  *       tags:
+  *       - Message
+  *       description: Send new message
+  *       parameters:
+  *         - in: header
+  *           name: channel
+  *           required: true
+  *           description: The dest channel id
+  *         - in: header
+  *           name: sender
+  *           required: true
+  *           description: The id from the current user 
+  *         - in: header
+  *           name: content
+  *           required: true
+  *           description: the content of the message
+  *         - in: header
+  *           name: date
+  *           required: true
+  *           description: current date
+  *       responses:
+  *         200:
+  *           description: An object with a single message's data
+  */
+ 
+ router.post('/',controller.create);
  
  module.exports = router;
