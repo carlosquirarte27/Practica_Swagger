@@ -38,6 +38,35 @@ const controller = require('./channels.controller');
 
  router.get('/:id', controller.getOne);
 
+  /**
+  * @swagger
+  *   /api/channels/:
+  *     post:
+  *       tags:
+  *       - Channels
+  *       description: Get one message by ID
+  *       parameters:
+  *         - in: header
+  *           name: name
+  *           required: true
+  *           description: Name of the channel
+  *         - in: header
+  *           name: channel_admin
+  *           required: true
+  *           description: The id from the user who created the channel
+  *         - in: header
+  *           name: Messages
+  *           required: true
+  *           description: Array of messages on the channel
+  *         - in: header
+  *           name: Users
+  *           required: true
+  *           description: Array of messages on the channel
+  *       responses:
+  *         200:
+  *           description: An object with a single message's data
+  */
+
  router.post('/',ChannelsController.create)
 module.exports = router;
 

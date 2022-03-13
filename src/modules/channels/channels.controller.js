@@ -30,12 +30,11 @@ const ChannelsController = {
     },
     create: (req, res) => {
         const new_channel = {
-            name:  req.body.name,
-            channel_admin: req.body.channel_admin,
-            messages : req.body.messages,
-            users: req.body.users
+            name:  req.headers.name,
+            channel_admin: req.headers.channel_admin,
+            messages : req.headers.messages,
+            users: req.headers.users
         };
-        console.log(new_channel)
         Database.collection("Channel").insertOne(new_channel, function(err, res) {
         if(err) res.send("err");
         else console.log("Todo bien")

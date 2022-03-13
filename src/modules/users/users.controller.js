@@ -40,10 +40,13 @@ const UsersController = {
     });
     },
     create: (req, res) => {
+        if(!req.headers.user_name || !req.headers.password){
+            res.send("Invalido")
+        }
         const new_user = {
-            user_name:  req.body.user_name,
-            password: req.body.password,
-            birthday : req.body.birthday
+            user_name:  req.headers.user_name,
+            password: req.headers.password,
+            birthday : req.headers.birthday
         };
         console.log(new_user)
         Database.collection("Users").insertOne(new_user, function(err, res) {

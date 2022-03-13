@@ -64,15 +64,15 @@ router.get('/:id', controller.getOne);
   *       - Users
   *       description: create new user
   *       parameters:
-  *         - in: body
+  *         - in: header
   *           name: user_name
   *           required: true
   *           description: The message's unique ID
-  *         - in: body
+  *         - in: header
   *           name: password
   *           required: true
   *           description: The id from the current user to get the invite id
-  *         - in: body
+  *         - in: header
   *           name: birthday
   *           required: false
   *           description: The user birthday
